@@ -1,28 +1,36 @@
 import { Field, Form, Formik } from "formik";
-import * as Yup from "yup";
+import toast, { Toaster } from "react-hot-toast";
 import css from "./SearchBar.module.css";
-import React from "react";
 
 
-const schema = Yup.object().shape({
-  query: Yup.string().min(3, "Too Short!").required("Required"),
-});
+
+
 
 
 
 const SearchBar = ({ submit }) => {
   const handleSubmit = (values, action) => {
-    submit(values.query);
+    
     action.resetForm();
+    if (values.query.trim() === "") {
+       toast.error("Please enter search query", {
+         position: "top-center",
+         duration: 1000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "dark",
+       });
+       return;
+    }
+    submit(values.query);
   };
 
   return (
     <header className={css.header}>
-      <Formik
-        initialValues={{ query: "" }}
-        onSubmit={handleSubmit}
-        validationSchema={schema}
-      >
+      <Formik initialValues={{ query: "" }} onSubmit={handleSubmit}>
         <Form>
           <Field
             name="query"
@@ -30,6 +38,8 @@ const SearchBar = ({ submit }) => {
             type="text"
           />
           <button type="submit">Search</button>
+
+          <Toaster closeOnClick={true} />
         </Form>
       </Formik>
     </header>

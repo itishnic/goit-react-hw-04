@@ -4,11 +4,10 @@ import "./App.css";
 import { getPicturesApi } from "./components/api/pictures=api";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import { Audio } from "react-loader-spinner";
-import toast, { Toaster } from "react-hot-toast";
+import ImageModal from "./components/ImageModal/ImageModal";
 import  SearchBar  from "./components/SearchBar/SearchBar";
 
 
-const notify = () => toast.error("This didn't work.");
 
 
 function App() {
@@ -17,6 +16,8 @@ function App() {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1)
   const [query, setQuery] = useState('')
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
 
 
@@ -47,8 +48,16 @@ function App() {
     setPage(1);
     setPictures([]);
   };
-  
 
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  }
+  
+ const closeModal = () => {
+   setIsModalOpen(false);
+   setSelectedImage(null);
+ };
   // useEffect(() => {
   //   const getPictures = async () => {
   //     try {
@@ -68,7 +77,7 @@ function App() {
   return (
     <>
       <SearchBar submit={handleSubmit} />
-      
+
       {isLoading && (
         <p>
           <Audio
@@ -84,12 +93,21 @@ function App() {
       )}
       {error && (
         <p>
-          <b>Opps...some error!</b>
+          <b>Something went wrong...</b>
         </p>
       )}
-      {pictures.length > 0 && <ImageGallery pictures={pictures} />}
+      {pictures.length > 0 && (
+        <ImageGallery pictures={pictures} onImageClick={handleImageClick} />
+      )}
       {pictures.length > 0 && (
         <button onClick={HandleLoadMore}>Load more...</button>
+      )}
+      {selectedImage && (
+        <ImageModal
+          isOpen={isModalOpen}
+          onRequestClose={closeModal}
+          image={selectedImage}
+        />
       )}
     </>
   );
