@@ -1,0 +1,8 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #3125d6; /* Замените на нужный цвет фона */
+    /* Другие стили для header */
+}

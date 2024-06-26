@@ -1,0 +1,17 @@
+/* styles.css */
+.imageContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px; 
+    overflow: hidden;
+}
+
+.imageBox {
+    padding: 10px;
+}
+
+.imageBox img {
+    width: 100%;
+}
+
+
