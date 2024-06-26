@@ -4,12 +4,11 @@ import  ImageCard  from "../ImageCard/ImageCard";
 
 const ImageGallery = ({ pictures, onImageClick }) => {
   return (
-    <div>
-      <ul className={css.imageContainer}>
+    <div className={css.imageContainer}>
+      <ul className={css.imageBox}>
         {pictures.map((picture) => (
           <li key={picture.id}>
             <ImageCard
-              className={css.imageBox}
               picture={picture}
               // webFormatURL={picture.urls.small}
               // largeImageURL={picture.urls.regular}

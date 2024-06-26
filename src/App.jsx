@@ -5,43 +5,36 @@ import { getPicturesApi } from "./components/api/pictures=api";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import { Audio } from "react-loader-spinner";
 import ImageModal from "./components/ImageModal/ImageModal";
-import  SearchBar  from "./components/SearchBar/SearchBar";
-
-
-
+import SearchBar from "./components/SearchBar/SearchBar";
 
 function App() {
   const [pictures, setPictures] = useState([]);
   const [isLoading, setisLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [page, setPage] = useState(1)
-  const [query, setQuery] = useState('')
+  const [page, setPage] = useState(1);
+  const [query, setQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-
-
+  const [selectedPicture, setSelectedPicture] = useState(null);
 
   useEffect(() => {
-    const fetchData = async() =>{
-    try {
-      setisLoading(true);
+    const fetchData = async () => {
+      try {
+        setisLoading(true);
         const data = await getPicturesApi(query, page);
-        setPictures((prev)=>[...prev, ...data]);
+        setPictures((prev) => [...prev, ...data]);
         console.log("data :>>", data);
       } catch (error) {
         setError(true);
       } finally {
         setisLoading(false);
-    }
-  };
-  query && fetchData();
-  }, [ page, query])
+      }
+    };
+    query && fetchData();
+  }, [page, query]);
 
   const HandleLoadMore = async () => {
     setPage(page + 1);
   };
-  
-
 
   const handleSubmit = async (searchQuery) => {
     setQuery(searchQuery);
@@ -49,15 +42,15 @@ function App() {
     setPictures([]);
   };
 
-  const handleImageClick = (image) => {
-    setSelectedImage(image);
+  const handleImageClick = (picture) => {
+    setSelectedPicture(picture);
     setIsModalOpen(true);
-  }
-  
- const closeModal = () => {
-   setIsModalOpen(false);
-   setSelectedImage(null);
- };
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedPicture(null);
+  };
   // useEffect(() => {
   //   const getPictures = async () => {
   //     try {
@@ -102,11 +95,11 @@ function App() {
       {pictures.length > 0 && (
         <button onClick={HandleLoadMore}>Load more...</button>
       )}
-      {selectedImage && (
+      {selectedPicture && (
         <ImageModal
           isOpen={isModalOpen}
           onRequestClose={closeModal}
-          image={selectedImage}
+          picture={selectedPicture}
         />
       )}
     </>

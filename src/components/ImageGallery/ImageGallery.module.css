@@ -1,17 +1,21 @@
 /* styles.css */
 .imageContainer {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px; 
-    overflow: hidden;
-}
+    width: 100%;
 
 .imageBox {
-    padding: 10px;
+    list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-left: 0;
 }
 
-.imageBox img {
-    width: 100%;
+.imageBox li {
+    list-style-type: none;
+  width: 100%;
+  max-width: 360px;}
 }
 
 
