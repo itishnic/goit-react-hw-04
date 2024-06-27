@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { getPicturesApi } from "./components/api/pictures=api";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
-
+import ImageModal from "./components/ImageModal/ImageModal";
 import SearchBar from "./components/SearchBar/SearchBar";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
