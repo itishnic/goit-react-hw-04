@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { getPicturesApi } from "./components/api/pictures=api";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
-import { Audio } from "react-loader-spinner";
 import ImageModal from "./components/ImageModal/ImageModal";
 import SearchBar from "./components/SearchBar/SearchBar";
+import Loader from "./components/Loader/Loader";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 
 function App() {
   const [pictures, setPictures] = useState([]);
@@ -71,24 +72,8 @@ function App() {
     <>
       <SearchBar submit={handleSubmit} />
 
-      {isLoading && (
-        <p>
-          <Audio
-            height="80"
-            width="80"
-            radius="9"
-            color="green"
-            ariaLabel="three-dots-loading"
-            wrapperStyle
-            wrapperClass
-          />
-        </p>
-      )}
-      {error && (
-        <p>
-          <b>Something went wrong...</b>
-        </p>
-      )}
+      {isLoading && <Loader />}
+      {error && <ErrorMessage />}
       {pictures.length > 0 && (
         <ImageGallery pictures={pictures} onImageClick={handleImageClick} />
       )}
