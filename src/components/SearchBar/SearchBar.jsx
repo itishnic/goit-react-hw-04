@@ -37,7 +37,9 @@ const SearchBar = ({ submit }) => {
             placeholder="Search images and photos"
             type="text"
           />
-          <button type="submit">Search</button>
+          <button className={css.button} type="submit">
+            Search
+          </button>
 
           <Toaster closeOnClick={true} />
         </Form>

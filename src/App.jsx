@@ -7,6 +7,7 @@ import ImageModal from "./components/ImageModal/ImageModal";
 import SearchBar from "./components/SearchBar/SearchBar";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 
 function App() {
   const [pictures, setPictures] = useState([]);
@@ -63,7 +64,8 @@ function App() {
         <ImageGallery pictures={pictures} onImageClick={handleImageClick} />
       )}
       {pictures.length > 0 && (
-        <button onClick={HandleLoadMore}>Load more...</button>
+        <LoadMoreBtn onClick={HandleLoadMore}/>
+        
       )}
       {selectedPicture && (
         <ImageModal
